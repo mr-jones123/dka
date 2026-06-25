@@ -31,6 +31,10 @@ def main() -> None:
         "build", help="prepare metadata, splits, reports, and dataset card"
     )
     build_p.add_argument("path", nargs="?", default=".")
+    build_p.add_argument("--preset", choices=["pld"])
+    build_p.add_argument("--out")
+    build_p.add_argument("--limit", type=int)
+    build_p.add_argument("--hf", action="store_true")
 
     export_p = sub.add_parser("export", help="export processed data for training")
     export_p.add_argument("path", nargs="?", default=".")
@@ -63,8 +67,17 @@ def main() -> None:
 
     if args.command == "build":
         root = Path(args.path).resolve()
+        if args.preset == "pld":
+            if not args.out:
+                parser.error("build --preset pld requires --out")
+            root = Path(args.out).resolve()
+            count = import_pld(Path(args.path).resolve(), root, args.limit)
+            console.print(f"[green]Imported {count} PLD rows.[/green]")
         result = build(root)
         _print_build(result.stats, result.flags)
+        if args.hf:
+            out = export_hf(root)
+            console.print(f"[green]Exported hf dataset to {out}[/green]")
         return
 
     if args.command == "export":

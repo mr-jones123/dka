@@ -87,12 +87,10 @@ For `.srt` segmentation:
 uv run dka build examples/bisaya-web
 ```
 
-Import a small UP-DSP-PLD Cebuano subset, then export for Whisper training:
+Build a small UP-DSP-PLD Cebuano subset and export it for Whisper training:
 
 ```bash
-uv run dka import-pld data/pld-ceb/PLD/CEB datasets/pld-ceb-small --limit 500
-uv run dka build datasets/pld-ceb-small
-uv run dka export datasets/pld-ceb-small --format hf
+uv run dka build data/pld-ceb/PLD/CEB --preset pld --out datasets/pld-ceb-small --limit 500 --hf
 ```
 
 Train and test Whisper:

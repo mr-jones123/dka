@@ -49,10 +49,16 @@ Validate raw files:
 uv run dka validate path/to/dataset
 ```
 
-Build processed outputs:
+Build processed outputs from an existing dka dataset:
 
 ```bash
 uv run dka build path/to/dataset
+```
+
+Build directly from UP-DSP-PLD and export Hugging Face CSVs:
+
+```bash
+uv run dka build path/to/PLD/CEB --preset pld --out datasets/pld-ceb-small --limit 500 --hf
 ```
 
 Export Hugging Face CSVs for Whisper-style ASR training:
