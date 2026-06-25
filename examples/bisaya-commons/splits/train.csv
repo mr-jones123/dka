@@ -1,0 +1,3 @@
+id,audio_path,text,language,speaker_id,domain,license,source,normalized_text,duration_sec,sample_rate,quality_flags,split
+hinog,processed/audio/hinog.wav,hinog,ceb,hinog,pronunciation,"Wikimedia Commons, verify per file",File:LL-Q33239 (ceb)-Howdy.carabao-hinog.wav,hinog,0.976,16000,[],train
+kinsa_ka,processed/audio/kinsa_ka.wav,Kinsa ka,ceb,kinsa,pronunciation,"Wikimedia Commons, verify per file",File:LL-Q33239 (ceb)-Knites-Kinsa ka.wav,kinsa ka,1.144,16000,[],train

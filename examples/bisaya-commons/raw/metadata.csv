@@ -1,0 +1,4 @@
+id,audio_path,text,language,speaker_id,domain,license,source
+kinsa_ka,raw/audio/kinsa_ka.wav,Kinsa ka,ceb,kinsa,pronunciation,"Wikimedia Commons, verify per file",File:LL-Q33239 (ceb)-Knites-Kinsa ka.wav
+hinog,raw/audio/hinog.wav,hinog,ceb,hinog,pronunciation,"Wikimedia Commons, verify per file",File:LL-Q33239 (ceb)-Howdy.carabao-hinog.wav
+ngalan,raw/audio/ngalan.wav,ngalan,ceb,ngalan,pronunciation,"Wikimedia Commons, verify per file",File:LL-Q33239 (ceb)-Howdy.carabao-ngalan.wav

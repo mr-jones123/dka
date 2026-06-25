@@ -1,0 +1,12 @@
+id,audio_path,text,language,speaker_id,domain,license,source,transcript_path,normalized_text,duration_sec,sample_rate,quality_flags,split
+sugbo_hymn_0001,processed/audio/sugbo_hymn_0001.wav,"Sugbo, harang kapupud-an sa habagatan",ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,"sugbo, harang kapupud-an sa habagatan",8.783,16000,[],train
+sugbo_hymn_0002,processed/audio/sugbo_hymn_0002.wav,Kinapusurang lalawigan sa kabisay-an,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,kinapusurang lalawigan sa kabisay-an,9.159,16000,[],train
+sugbo_hymn_0003,processed/audio/sugbo_hymn_0003.wav,Sa kaalam adunahan,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,sa kaalam adunahan,8.489,16000,[],train
+sugbo_hymn_0004,processed/audio/sugbo_hymn_0004.wav,Sa among gugma ug dungog kanunay'ng halaran,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,sa among gugma ug dungog kanunay'ng halaran,9.349,16000,[],train
+sugbo_hymn_0005,processed/audio/sugbo_hymn_0005.wav,"Sugbo, unang binunyagan sa Kristohanong tinuho-an",ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,"sugbo, unang binunyagan sa kristohanong tinuho-an",8.184,16000,[],train
+sugbo_hymn_0006,processed/audio/sugbo_hymn_0006.wav,Gipanalipdan kanunay ni Señor Santo Niño,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,gipanalipdan kanunay ni señor santo niño,9.449,16000,[],train
+sugbo_hymn_0007,processed/audio/sugbo_hymn_0007.wav,"Makasaysayanon, maabi-abihon, madanihon",ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,"makasaysayanon, maabi-abihon, madanihon",9.581,16000,[],train
+sugbo_hymn_0008,processed/audio/sugbo_hymn_0008.wav,Ug angay ka gayud nga ipasigarbo,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,ug angay ka gayud nga ipasigarbo,8.051,16000,[],train
+sugbo_hymn_0009,processed/audio/sugbo_hymn_0009.wav,"Sugbo, pinangga sa klima ug panahon",ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,"sugbo, pinangga sa klima ug panahon",8.517,16000,[],train
+sugbo_hymn_0010,processed/audio/sugbo_hymn_0010.wav,"Kalinaw, kauswagan — palungtaron, palambuon",ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,"kalinaw, kauswagan — palungtaron, palambuon",9.132,16000,[],train
+sugbo_hymn_0011,processed/audio/sugbo_hymn_0011.wav,Bisan asa modangat sa among pagpaningkamot,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,bisan asa modangat sa among pagpaningkamot,8.833,16000,[],train

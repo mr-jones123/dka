@@ -1,0 +1,2 @@
+id,audio_path,text,language,speaker_id,domain,license,source,transcript_path
+sugbo_hymn,raw/audio/sugbo.flac,"",ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt

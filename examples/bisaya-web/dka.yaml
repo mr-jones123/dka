@@ -1,0 +1,33 @@
+name: bisaya-speech-demo
+description: Speech dataset prepared with dka
+language: ceb
+license: CC-BY-NC-4.0
+input:
+  metadata: raw/metadata.csv
+  audio_dir: raw/audio
+audio:
+  sample_rate: 16000
+  mono: true
+  format: wav
+  min_duration_sec: 0.5
+  max_duration_sec: 20
+text:
+  lowercase: true
+  trim_whitespace: true
+  remove_extra_spaces: true
+quality:
+  flag_empty_text: true
+  flag_long_audio: true
+  flag_short_audio: true
+  flag_duplicate_text: true
+splits:
+  strategy: speaker
+  train: 0.8
+  dev: 0.1
+  test: 0.1
+  seed: 42
+output:
+  processed_dir: processed
+  reports_dir: reports
+  splits_dir: splits
+  dataset_card: dataset_card.md

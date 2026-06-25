@@ -1,0 +1,2 @@
+id,audio_path,text,language,speaker_id,domain,license,source,transcript_path,normalized_text,duration_sec,sample_rate,quality_flags,split
+sugbo_hymn_0012,processed/audio/sugbo_hymn_0012.wav,Ikaw amo kanunay nga handumon,ceb,unknown,music,CC,MLCommons/speech-wikimedia,raw/sugbo.ceb.srt,ikaw amo kanunay nga handumon,8.865,16000,[],dev

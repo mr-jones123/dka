@@ -1,0 +1,2 @@
+id,audio_path,text,language,speaker_id,domain,license,source,normalized_text,duration_sec,sample_rate,quality_flags,split
+ngalan,processed/audio/ngalan.wav,ngalan,ceb,ngalan,pronunciation,"Wikimedia Commons, verify per file",File:LL-Q33239 (ceb)-Howdy.carabao-ngalan.wav,ngalan,0.992,16000,[],test

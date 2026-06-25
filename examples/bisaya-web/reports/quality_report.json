@@ -1,0 +1,11 @@
+{
+  "name": "bisaya-speech-demo",
+  "total_samples": 14,
+  "total_hours": 0.0357,
+  "languages": {
+    "ceb": 14
+  },
+  "speakers": 1,
+  "flagged_samples": 0,
+  "flags": {}
+}
