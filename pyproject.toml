@@ -13,6 +13,7 @@ dependencies = [
   "rich>=13.7.0",
   "soundfile>=0.14.0",
   "torch>=2.12.1",
+  "torchcodec>=0.14.0",
   "transformers>=5.12.1",
 ]
 

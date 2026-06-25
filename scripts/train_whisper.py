@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import logging
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -32,14 +33,18 @@ class DataCollatorSpeechSeq2Seq:
 
 
 def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
+    log = logging.getLogger("train_whisper")
     parser = argparse.ArgumentParser()
     parser.add_argument("dataset", help="dka dataset folder")
     parser.add_argument("--model", default="openai/whisper-tiny")
     parser.add_argument("--out", default="runs/whisper-ceb")
     parser.add_argument("--steps", type=int, default=200)
+    parser.add_argument("--language", default="tagalog")
     args = parser.parse_args()
 
     root = Path(args.dataset)
+    log.info("loading dka hf export from %s", root / "exports/hf")
     data = DatasetDict(
         {
             "train": load_dataset("csv", data_files=str(root / "exports/hf/train.csv"))[
@@ -52,10 +57,21 @@ def main() -> None:
                 "train"
             ],
         }
-    ).cast_column("audio", Audio(sampling_rate=16000))
+    )
+    data = data.map(lambda row: {"audio": {"path": row["audio"]}})
+    data = data.cast_column("audio", Audio(sampling_rate=16000))
+    log.info(
+        "loaded splits: train=%d validation=%d test=%d",
+        len(data["train"]),
+        len(data["validation"]),
+        len(data["test"]),
+    )
 
+    log.info(
+        "loading model %s with Whisper language token %s", args.model, args.language
+    )
     processor = WhisperProcessor.from_pretrained(
-        args.model, language="Cebuano", task="transcribe"
+        args.model, language=args.language, task="transcribe"
     )
     model = WhisperForConditionalGeneration.from_pretrained(args.model)
     model.config.forced_decoder_ids = None
@@ -69,7 +85,9 @@ def main() -> None:
         batch["labels"] = processor.tokenizer(batch["sentence"]).input_ids
         return batch
 
-    data = data.map(prepare, remove_columns=data["train"].column_names, num_proc=1)
+    log.info("extracting Whisper features")
+    data = data.map(prepare, remove_columns=data["train"].column_names)
+    log.info("loading WER/CER metrics")
     wer = evaluate.load("wer")
     cer = evaluate.load("cer")
 
@@ -102,7 +120,6 @@ def main() -> None:
         predict_with_generate=True,
         generation_max_length=225,
         report_to=[],
-        use_mps_device=torch.backends.mps.is_available(),
     )
     trainer = Seq2SeqTrainer(
         args=training_args,
@@ -111,9 +128,11 @@ def main() -> None:
         eval_dataset=data["validation"],
         data_collator=DataCollatorSpeechSeq2Seq(processor),
         compute_metrics=compute_metrics,
-        tokenizer=processor.feature_extractor,
+        processing_class=processor.feature_extractor,
     )
+    log.info("starting training for %d steps", args.steps)
     trainer.train()
+    log.info("saving model to %s", args.out)
     trainer.save_model(args.out)
     processor.save_pretrained(args.out)
     print(f"saved model to {args.out}")

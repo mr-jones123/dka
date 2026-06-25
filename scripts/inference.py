@@ -11,10 +11,13 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("model", help="model name or fine-tuned model folder")
     parser.add_argument("audio", help="audio file path")
+    parser.add_argument("--language", default="tagalog")
     args = parser.parse_args()
 
     device = "mps" if torch.backends.mps.is_available() else "cpu"
-    processor = WhisperProcessor.from_pretrained(args.model)
+    processor = WhisperProcessor.from_pretrained(
+        args.model, language=args.language, task="transcribe"
+    )
     model = WhisperForConditionalGeneration.from_pretrained(args.model).to(device)
     model.eval()
 
