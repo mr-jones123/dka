@@ -6,6 +6,7 @@ import random
 import re
 import shutil
 import subprocess
+import unicodedata
 import wave
 from dataclasses import dataclass
 from pathlib import Path
@@ -26,7 +27,13 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "min_duration_sec": 0.5,
         "max_duration_sec": 20,
     },
-    "text": {"lowercase": True, "trim_whitespace": True, "remove_extra_spaces": True},
+    "text": {
+        "lowercase": True,
+        "trim_whitespace": True,
+        "remove_extra_spaces": True,
+        "strip_accents": True,
+        "hyphens_to_spaces": True,
+    },
     "quality": {
         "flag_empty_text": True,
         "flag_long_audio": True,
@@ -371,6 +378,14 @@ def convert_audio(source: Path, target: Path, sample_rate: int) -> bool:
 
 def normalize_text(text: str, config: dict[str, Any]) -> str:
     out = text.strip() if config["text"].get("trim_whitespace") else text
+    if config["text"].get("strip_accents"):
+        out = "".join(
+            char
+            for char in unicodedata.normalize("NFKD", out)
+            if not unicodedata.combining(char)
+        )
+    if config["text"].get("hyphens_to_spaces"):
+        out = re.sub(r"[-‐‑‒–—]+", " ", out)
     if config["text"].get("lowercase"):
         out = out.lower()
     if config["text"].get("remove_extra_spaces"):

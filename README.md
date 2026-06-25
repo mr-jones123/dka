@@ -60,6 +60,9 @@ This helps researchers, students, and community contributors prepare Cebuano/Bis
 - quality reports in JSON and Markdown
 - generated `dataset_card.md`
 - `SKILL.md` so AI agents can use the tool correctly
+- UP-DSP-PLD importer for `.log` + `.wav` session folders
+- Hugging Face export adapter for Whisper-style ASR training
+- Whisper training and inference scripts
 - example Cebuano/Bisaya datasets from Wikimedia/MLCommons test data
 
 ## Install
@@ -99,6 +102,56 @@ Train and test Whisper:
 uv run python scripts/train_whisper.py datasets/pld-ceb-small --steps 200
 uv run python scripts/inference.py runs/whisper-ceb sample.wav
 ```
+
+## Training result
+
+We used `dka` to prepare a real Cebuano subset from UP-DSP-PLD and fine-tune a Hugging Face Whisper model.
+
+Demo command:
+
+```bash
+uv run dka build data/pld-ceb/PLD/CEB --preset pld --out datasets/pld-ceb-5k --limit 5000 --hf
+uv run python scripts/train_whisper.py datasets/pld-ceb-5k --steps 500 --out runs/whisper-ceb-5k
+```
+
+Dataset built by `dka`:
+
+```text
+samples: 5,000
+hours: 6.51
+speakers: 14
+language: Cebuano / ceb
+exports: Hugging Face train/dev/test CSVs
+```
+
+Training outcome after 500 steps:
+
+```text
+train loss: 19.95 → 2.15
+eval loss: 1.08 → 0.62
+best CER: 23.25%
+best WER: 64.93%
+```
+
+The model can transcribe a fresh recorded Cebuano sample:
+
+```bash
+uv run python scripts/inference.py runs/whisper-ceb-5k sample.mp3
+```
+
+Example output:
+
+```text
+maayong buntag, hinawot nga maayo ang imong adlaw karon.
+```
+
+This proves the full loop works:
+
+```text
+UP-DSP-PLD raw files → dka build → HF export → Whisper fine-tuning → Cebuano inference
+```
+
+The WER is still high because Whisper has no native Cebuano language token, so this is a prototype model, not a production ASR system. The important result is that `dka` makes the dataset preparation and training path reproducible.
 
 ## Input shape
 
