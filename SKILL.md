@@ -55,6 +55,12 @@ Build processed outputs:
 uv run dka build path/to/dataset
 ```
 
+Export Hugging Face CSVs for Whisper-style ASR training:
+
+```bash
+uv run dka export path/to/dataset --format hf
+```
+
 ## Agent workflow
 
 1. Inspect `dka.yaml` and `raw/metadata.csv`.

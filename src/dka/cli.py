@@ -8,6 +8,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 from dka import __version__
+from dka.adapters import export_hf
 from dka.core import build, init_project, validate
 
 console = Console()
@@ -31,6 +32,10 @@ def main() -> None:
     )
     build_p.add_argument("path", nargs="?", default=".")
 
+    export_p = sub.add_parser("export", help="export processed data for training")
+    export_p.add_argument("path", nargs="?", default=".")
+    export_p.add_argument("--format", choices=["hf"], default="hf")
+
     args = parser.parse_args()
     root = Path(args.path).resolve()
 
@@ -53,6 +58,17 @@ def main() -> None:
     if args.command == "build":
         result = build(root)
         _print_build(result.stats, result.flags)
+        return
+
+    if args.command == "export":
+        out = export_hf(root)
+        console.print(
+            Panel.fit(
+                f"Exported [bold]{args.format}[/bold] dataset to [bold]{out}[/bold]",
+                title="dka export",
+                border_style="green",
+            )
+        )
         return
 
 

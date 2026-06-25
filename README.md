@@ -87,6 +87,12 @@ For `.srt` segmentation:
 uv run dka build examples/bisaya-web
 ```
 
+Export for Hugging Face / Whisper training:
+
+```bash
+uv run dka export examples/bisaya-web --format hf
+```
+
 ## Input shape
 
 ```text
