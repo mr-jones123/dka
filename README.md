@@ -87,10 +87,19 @@ For `.srt` segmentation:
 uv run dka build examples/bisaya-web
 ```
 
-Export for Hugging Face / Whisper training:
+Import a small UP-DSP-PLD Cebuano subset, then export for Whisper training:
 
 ```bash
-uv run dka export examples/bisaya-web --format hf
+uv run dka import-pld data/pld-ceb/PLD/CEB datasets/pld-ceb-small --limit 500
+uv run dka build datasets/pld-ceb-small
+uv run dka export datasets/pld-ceb-small --format hf
+```
+
+Train and test Whisper:
+
+```bash
+uv run python scripts/train_whisper.py datasets/pld-ceb-small --steps 200
+uv run python scripts/inference.py runs/whisper-ceb sample.wav
 ```
 
 ## Input shape

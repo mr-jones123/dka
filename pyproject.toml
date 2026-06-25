@@ -5,8 +5,15 @@ description = "Dataset kit assistant for Philippine speech datasets"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
+  "accelerate>=1.14.0",
+  "datasets>=5.0.0",
+  "evaluate>=0.4.6",
+  "jiwer>=4.0.0",
   "pyyaml>=6.0.2",
   "rich>=13.7.0",
+  "soundfile>=0.14.0",
+  "torch>=2.12.1",
+  "transformers>=5.12.1",
 ]
 
 [project.scripts]
