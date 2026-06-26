@@ -5,6 +5,10 @@
 **Team name:** iForgot  
 **Members:** Xynil Jhed Lacap, Lady Diane Casilang, Raphael Andre Mercado
 
+## AI assistance
+
+We used GPT 5.5 through Codex and pi to help build, document, and package this project.
+
 ## Chosen track
 
 We chose **GitHub Education Project Case: Tinig sa Liwanag**.
@@ -67,13 +71,22 @@ This helps researchers, students, and community contributors prepare Cebuano/Bis
 
 ## Install
 
+Install from PyPI:
+
 ```bash
-uv sync
+pip install dka-speech
 ```
 
-Run locally:
+Run the CLI:
 
 ```bash
+dka --help
+```
+
+For local development:
+
+```bash
+uv sync
 uv run dka --help
 ```
 
@@ -90,7 +103,19 @@ For `.srt` segmentation:
 uv run dka build examples/bisaya-web
 ```
 
-Build a small UP-DSP-PLD Cebuano subset and export it for Whisper training:
+Build the included mini UP-DSP-PLD Cebuano demo dataset:
+
+```bash
+dka build examples/pld-ceb-mini/PLD/CEB --preset pld --out datasets/pld-ceb-demo --limit 10 --hf
+```
+
+For local development, use:
+
+```bash
+uv run dka build examples/pld-ceb-mini/PLD/CEB --preset pld --out datasets/pld-ceb-demo --limit 10 --hf
+```
+
+Build a larger UP-DSP-PLD Cebuano subset and export it for Whisper training:
 
 ```bash
 uv run dka build data/pld-ceb/PLD/CEB --preset pld --out datasets/pld-ceb-small --limit 500 --hf

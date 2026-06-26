@@ -1,9 +1,12 @@
 [project]
-name = "dka"
+name = "dka-speech"
 version = "0.1.0"
 description = "Dataset kit assistant for Philippine speech datasets"
 readme = "README.md"
 requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Xynil Jhed Lacap" }]
+keywords = ["speech", "datasets", "philippines", "whisper"]
 dependencies = [
   "accelerate>=1.14.0",
   "datasets>=5.0.0",
@@ -20,6 +23,15 @@ dependencies = [
 [project.scripts]
 dka = "dka.cli:main"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/dka"]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "build>=1.5.0",
+    "twine>=6.2.0",
+]
