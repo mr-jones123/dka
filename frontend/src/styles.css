@@ -51,7 +51,18 @@ body {
   min-width: 320px;
   margin: 0;
   overflow-x: hidden;
-  background: var(--parchment);
+  background:
+    linear-gradient(rgba(26, 13, 8, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 13, 8, 0.045) 1px, transparent 1px),
+    radial-gradient(circle at 18% 8%, rgba(232, 184, 64, 0.2), transparent 28rem),
+    radial-gradient(circle at 86% 42%, rgba(90, 30, 19, 0.08), transparent 30rem),
+    var(--parchment);
+  background-size:
+    34px 34px,
+    34px 34px,
+    auto,
+    auto,
+    auto;
 }
 
 body::before {
@@ -193,6 +204,15 @@ code {
 .menu-toggle:hover {
   background: var(--gold);
   color: var(--oxblood);
+}
+
+.hero-ornament {
+  position: absolute;
+  top: clamp(120px, 11vw, 190px);
+  right: clamp(28px, 5vw, 86px);
+  z-index: 1;
+  width: clamp(280px, 30vw, 450px);
+  pointer-events: none;
 }
 
 .hero-section {
@@ -724,6 +744,10 @@ code {
 
   .nav-menu a:first-child {
     border-top: 0;
+  }
+
+  .hero-ornament {
+    display: none;
   }
 }
 

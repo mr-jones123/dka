@@ -171,6 +171,13 @@ function App() {
           </div>
         </nav>
 
+        <img
+          className="hero-ornament"
+          src="/hero-options/option-2-signboard-mic.svg"
+          alt=""
+          aria-hidden="true"
+        />
+
         <div className="hero-section">
           <p className="kicker">Low-resource language tooling for Bisaya and beyond</p>
           <h1 className="hero-title" aria-label="For Filipinos. By a Filipino.">

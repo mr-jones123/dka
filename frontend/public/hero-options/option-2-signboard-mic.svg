@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" fill="none">
+  <style>
+    .wave {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: pulse-wave 1.8s ease-out infinite;
+    }
+    .wave.mid { animation-delay: .18s; }
+    .wave.outer { animation-delay: .36s; }
+    @keyframes pulse-wave {
+      0% { opacity: .35; transform: scale(.88); }
+      45% { opacity: 1; }
+      100% { opacity: .12; transform: scale(1.1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wave { animation: none; opacity: 1; }
+    }
+  </style>
+
+  <g stroke="#e8b840" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity=".95" transform="translate(10 10)">
+    <path d="M390 158c80 0 146 66 146 146v44c0 80-66 146-146 146s-146-66-146-146v-44c0-80 66-146 146-146Z" fill="#e8b840"/>
+    <path d="M292 318h196M306 262h168M306 374h168M390 494v82M290 576h200"/>
+    <path class="wave mid" d="M172 272c-38 32-60 78-60 128s22 96 60 128M620 272c38 32 60 78 60 128s-22 96-60 128"/>
+  </g>
+
+  <g stroke="#1a0d08" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M390 158c80 0 146 66 146 146v44c0 80-66 146-146 146s-146-66-146-146v-44c0-80 66-146 146-146Z" fill="#5a1e13"/>
+    <path d="M292 318h196M306 262h168M306 374h168"/>
+    <path d="M334 206c18-14 37-22 56-22s38 8 56 22"/>
+    <path d="M390 494v82M290 576h200"/>
+    <path class="wave mid" d="M174 270c-40 34-63 80-63 130s23 96 63 130"/>
+    <path class="wave outer" d="M116 214c-62 51-96 116-96 186s34 135 96 186"/>
+    <path class="wave mid" d="M606 270c40 34 63 80 63 130s-23 96-63 130"/>
+    <path class="wave outer" d="M664 214c62 51 96 116 96 186s-34 135-96 186"/>
+    <path d="M286 104h208l-24 64H310l-24-64Z" fill="#f5ebd9"/>
+  </g>
+  <text x="334" y="148" font-family="Cubao, monospace" font-size="35" font-weight="900" letter-spacing="7" fill="#1a0d08">DKA</text>
+</svg>
