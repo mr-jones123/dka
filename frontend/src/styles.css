@@ -1,0 +1,787 @@
+@font-face {
+  font-family: "Quiapo";
+  src: url("/fonts/Quiapo_Free.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cubao";
+  src: url("/fonts/Cubao_Free.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --parchment: #efe6d2;
+  --bone: #f5ebd9;
+  --bone-deep: #e6dbc0;
+  --gold: #e8b840;
+  --gold-dim: #c99a28;
+  --amber-soft: #f2d47a;
+  --oxblood: #5a1e13;
+  --oxblood-dim: #431209;
+  --carbon: #2b160e;
+  --ink: #1a0d08;
+  --line: rgba(26, 13, 8, 0.12);
+  --line-strong: rgba(26, 13, 8, 0.22);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--carbon);
+  background: var(--parchment);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--parchment);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.17  0 0 0 0 0.09  0 0 0 0 0.05  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+code {
+  font-family: "SFMono-Regular", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  letter-spacing: 0;
+}
+
+::selection {
+  color: var(--ink);
+  background: var(--gold);
+}
+
+.site-shell {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  padding: 32px clamp(20px, 4vw, 64px) 64px;
+}
+
+.opencode-frame {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  background: rgba(245, 235, 217, 0.48);
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+
+.top-strip {
+  display: grid;
+  grid-template-columns: 1.2fr 3fr;
+  align-items: stretch;
+  border-bottom: 1.5px solid var(--ink);
+}
+
+.nav-menu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.brand,
+.hero-title,
+.strip-heading h2,
+.simulator-heading h2,
+.pipeline-copy h2,
+.evidence-card h2,
+.bottom-placard h2,
+.sign-plate h3,
+.stack-plate h3 {
+  font-family: "Quiapo", ui-sans-serif, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  min-height: 76px;
+  padding: 0 clamp(18px, 3vw, 34px);
+  color: var(--ink);
+  font-size: clamp(1.9rem, 3vw, 2.5rem);
+  line-height: 0.9;
+}
+
+.top-strip a:not(.brand),
+.menu-toggle,
+.kicker,
+.micro-note,
+.strip-heading p,
+.card-topline,
+.metric-card span,
+.terminal-top,
+.command-button,
+.bottom-placard p {
+  font-family: "Cubao", ui-monospace, monospace;
+  text-transform: uppercase;
+}
+
+.strip-heading p,
+.micro-note {
+  color: rgba(43, 22, 14, 0.62);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+}
+
+.top-strip a:not(.brand),
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 76px;
+  padding: 0 18px;
+  border-left: 1.5px solid var(--ink);
+  color: rgba(43, 22, 14, 0.74);
+  font-size: 0.72rem;
+  letter-spacing: 0.17em;
+  transition: color 160ms ease, transform 160ms ease;
+}
+
+.menu-toggle {
+  display: none;
+  justify-self: stretch;
+  background: transparent;
+  cursor: pointer;
+}
+
+.top-strip a:not(.brand):hover,
+.menu-toggle:hover {
+  background: var(--gold);
+  color: var(--oxblood);
+}
+
+.hero-section {
+  position: relative;
+  z-index: 2;
+  max-width: 1060px;
+  margin: 0;
+  padding: clamp(54px, 8vw, 104px) clamp(22px, 5vw, 70px) clamp(60px, 8vw, 98px);
+  text-align: left;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--oxblood);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+}
+
+.hero-title {
+  display: grid;
+  gap: 4px;
+  margin: 26px 0 0;
+  color: var(--ink);
+  font-size: clamp(4.1rem, 11vw, 9rem);
+  font-weight: 900;
+  line-height: 0.83;
+  text-shadow:
+    3px 3px 0 var(--gold),
+    4px 4px 0 var(--gold);
+  text-wrap: balance;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-ox {
+  color: var(--oxblood);
+}
+
+.hero-copy {
+  max-width: 66ch;
+  margin: 32px 0 0;
+  color: rgba(43, 22, 14, 0.84);
+  font-size: clamp(1rem, 1.8vw, 1.22rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 38px;
+}
+
+.install-command {
+  display: flex;
+  align-items: center;
+  width: min(100%, 640px);
+  min-height: 58px;
+  margin-top: 34px;
+  overflow: hidden;
+  background: rgba(245, 235, 217, 0.72);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+}
+
+.install-command code {
+  flex: 1;
+  padding: 0 20px;
+  color: var(--carbon);
+  font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+}
+
+.install-command button {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 118px;
+  padding: 0 16px;
+  color: var(--ink);
+  background: var(--gold);
+  border: 0;
+  border-left: 1.5px solid var(--ink);
+  font-family: "Cubao", ui-monospace, monospace;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+
+.install-command button:hover {
+  background: var(--gold-dim);
+}
+
+.btn-primary,
+.btn-light,
+.command-button {
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 58px;
+  padding: 0 30px;
+  color: var(--ink);
+  background: var(--gold);
+  border: 1.5px solid var(--ink);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  font-family: "Quiapo", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition:
+    transform 140ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 140ms cubic-bezier(0.32, 0.72, 0, 1),
+    background 140ms ease;
+}
+
+.btn-primary:hover {
+  background: var(--gold-dim);
+}
+
+.btn-primary:active,
+.btn-light:active,
+.command-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--ink);
+}
+
+.card-strip,
+.simulator-section,
+.evidence-section {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: clamp(34px, 5vw, 52px) auto 0;
+  padding: clamp(26px, 4vw, 48px);
+  background: rgba(245, 235, 217, 0.5);
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 6px 6px 0 0 var(--ink);
+}
+
+.strip-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 36px;
+}
+
+.strip-heading h2,
+.simulator-heading h2,
+.pipeline-copy h2,
+.evidence-card h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.strip-heading h2 span {
+  color: var(--oxblood);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.sign-plate {
+  background: var(--bone);
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 1px var(--parchment),
+    inset 0 0 0 2.5px var(--ink),
+    6px 6px 0 0 var(--ink);
+}
+
+.sign-plate-gold {
+  background: var(--gold);
+  box-shadow:
+    inset 0 0 0 1px var(--amber-soft),
+    inset 0 0 0 2.5px var(--ink),
+    6px 6px 0 0 var(--oxblood);
+}
+
+.cards-grid .sign-plate {
+  min-height: 286px;
+  padding: 30px;
+  transition: transform 260ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.cards-grid .sign-plate:hover {
+  transform: translateY(-5px);
+}
+
+.card-topline {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  color: var(--oxblood);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+}
+
+.sign-plate h3 {
+  margin: 28px 0 0;
+  color: var(--ink);
+  font-size: clamp(2rem, 3.4vw, 2.7rem);
+  line-height: 0.92;
+  text-shadow: 3px 3px 0 var(--gold);
+}
+
+.sign-plate-gold h3 {
+  text-shadow: 3px 3px 0 var(--bone);
+}
+
+.sign-plate p {
+  margin: 22px 0 0;
+  max-width: 44ch;
+  color: rgba(43, 22, 14, 0.84);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.simulator-heading {
+  max-width: 1120px;
+  margin-bottom: 38px;
+}
+
+.simulator-grid {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
+  gap: 22px;
+}
+
+.command-list {
+  display: grid;
+  gap: 12px;
+}
+
+.command-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding: 0 18px;
+  color: var(--carbon);
+  background: var(--bone);
+  border: 1.5px solid var(--ink);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  transition:
+    transform 140ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 140ms cubic-bezier(0.32, 0.72, 0, 1),
+    background 140ms ease,
+    color 140ms ease;
+}
+
+.command-button:hover {
+  background: var(--bone-deep);
+}
+
+.command-button.active {
+  color: var(--bone);
+  background: var(--oxblood);
+}
+
+.terminal-plate {
+  overflow: hidden;
+  color: var(--bone);
+  background: var(--ink);
+  border: 1.5px solid var(--gold);
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 1px var(--oxblood-dim),
+    inset 0 0 0 2.5px var(--ink),
+    8px 8px 0 0 var(--gold);
+}
+
+.terminal-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 20px;
+  color: var(--gold);
+  border-bottom: 1px solid rgba(232, 184, 64, 0.26);
+  font-family: "SFMono-Regular", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.terminal-plate pre {
+  padding: 28px 24px 10px;
+  color: var(--gold);
+  font-size: clamp(0.95rem, 1.25vw, 1.08rem);
+  line-height: 1.5;
+}
+
+.terminal-output {
+  min-height: 188px;
+  padding: 12px 24px 28px;
+}
+
+.terminal-output p {
+  margin: 9px 0 0;
+  color: rgba(245, 235, 217, 0.82);
+  font-family: "SFMono-Regular", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.evidence-card {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.evidence-card svg {
+  color: var(--oxblood);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 36px;
+}
+
+.metric-card {
+  padding: 20px;
+  background: var(--bone-deep);
+  border: 1.5px solid var(--ink);
+  border-radius: 3px;
+}
+
+.metric-card span {
+  display: block;
+  color: var(--oxblood);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 16px;
+  color: var(--ink);
+  font-family: "Quiapo", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 900;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+
+.metric-card p {
+  margin: 10px 0 0;
+  color: rgba(43, 22, 14, 0.78);
+}
+
+.bottom-placard {
+  position: relative;
+  z-index: 2;
+  max-width: 1400px;
+  margin: clamp(34px, 5vw, 52px) auto 0;
+  overflow: hidden;
+  padding: clamp(26px, 4vw, 40px);
+  color: var(--gold);
+  background: var(--ink);
+  border: 1.5px solid rgba(232, 184, 64, 0.42);
+  border-radius: 4px;
+  box-shadow: 8px 8px 0 0 var(--gold);
+}
+
+.bottom-placard .kicker {
+  color: rgba(232, 184, 64, 0.76);
+}
+
+.bottom-placard h2 {
+  max-width: 980px;
+  margin: 18px 0 0;
+  color: var(--gold);
+  font-size: clamp(2.4rem, 5.3vw, 5.3rem);
+  line-height: 0.9;
+}
+
+.install-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr);
+  gap: 28px;
+  margin-top: 28px;
+  align-items: end;
+}
+
+.bottom-placard p:not(.kicker) {
+  max-width: 760px;
+  color: rgba(245, 235, 217, 0.78);
+  font-size: 1rem;
+  line-height: 1.7;
+  text-transform: none;
+}
+
+.btn-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  margin-top: 0;
+  padding: 0 22px;
+  color: var(--ink);
+  background: var(--bone);
+  border: 1.5px solid var(--gold);
+  box-shadow: 4px 4px 0 0 var(--gold);
+  font-family: "Quiapo", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.12rem;
+  text-transform: uppercase;
+  transition:
+    transform 140ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 140ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.bolt {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: var(--gold);
+  border: 1px solid rgba(245, 235, 217, 0.5);
+  border-radius: 999px;
+}
+
+.bolt-a {
+  top: 18px;
+  left: 18px;
+}
+
+.bolt-b {
+  top: 18px;
+  right: 18px;
+}
+
+.bolt-c {
+  bottom: 18px;
+  left: 18px;
+}
+
+.bolt-d {
+  right: 18px;
+  bottom: 18px;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 1400px;
+  min-height: 58px;
+  margin: clamp(22px, 4vw, 34px) auto 0;
+  padding: 0 clamp(18px, 3vw, 28px);
+  color: rgba(43, 22, 14, 0.72);
+  background: rgba(245, 235, 217, 0.5);
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 0 var(--ink);
+  font-family: "Cubao", ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.reveal-plate {
+  transform-origin: center;
+}
+
+@media (max-width: 960px) {
+  .top-strip {
+    grid-template-columns: 1fr auto;
+  }
+
+  .cards-grid,
+  .simulator-grid,
+  .metrics-grid,
+  .install-row {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-toggle {
+    display: flex;
+    min-width: 84px;
+  }
+
+  .nav-menu {
+    display: none;
+    grid-column: 1 / -1;
+    grid-template-columns: 1fr;
+    border-top: 1.5px solid var(--ink);
+  }
+
+  .nav-menu.open {
+    display: grid;
+  }
+
+  .top-strip a:not(.brand) {
+    justify-content: flex-start;
+    border-top: 1.5px solid var(--ink);
+    border-left: 0;
+  }
+
+  .nav-menu a:first-child {
+    border-top: 0;
+  }
+}
+
+@media (max-width: 680px) {
+  .site-shell {
+    padding: 24px 18px 42px;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 20vw, 6.5rem);
+  }
+
+  .install-command {
+    display: grid;
+  }
+
+  .install-command code {
+    padding: 18px;
+  }
+
+  .install-command button {
+    min-height: 48px;
+    border-top: 1.5px solid var(--ink);
+    border-left: 0;
+  }
+
+  .strip-heading {
+    display: block;
+  }
+
+  .strip-heading p {
+    margin-top: 16px;
+  }
+
+  .terminal-plate pre,
+  .terminal-output {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .bottom-placard {
+    padding: 36px 24px;
+  }
+
+  .site-footer {
+    display: grid;
+    gap: 10px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
