@@ -9,6 +9,12 @@
 
 We used GPT 5.5 through Codex and pi to help build, document, and package this project.
 
+## Links
+
+PyPi: https://pypi.org/project/dka-speech/0.1.0/
+Website: https://dka.xy-800.workers.dev/
+Presentation: https://coast-617.faces.site/hi7tux9narmi
+
 ## Chosen track
 
 We chose **GitHub Education Project Case: Tinig sa Liwanag**.
