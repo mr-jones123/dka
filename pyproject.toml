@@ -1,6 +1,6 @@
 [project]
 name = "dka-speech"
-version = "0.1.0"
+version = "0.1.2"
 description = "Dataset kit assistant for Philippine speech datasets"
 readme = "README.md"
 requires-python = ">=3.11"

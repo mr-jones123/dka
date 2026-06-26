@@ -1,6 +1,6 @@
 # dka
 
-![dka editorial project poster](assets/dka-poster.png)
+![dka project poster with the frontend visual style](assets/dka-poster.png)
 
 **Team name:** iForgot  
 **Members:** Xynil Jhed Lacap, Lady Diane Casilang, Raphael Andre Mercado
